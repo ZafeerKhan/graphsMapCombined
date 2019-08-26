@@ -81,4 +81,5 @@ app.get('/siteLocations', (req, res) => {
 	
 });
 
-app.listen(3000, () => console.log('server started'));
+var PORT = 8081
+app.listen(PORT, () => console.log('server started on port: ' + PORT));

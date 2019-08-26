@@ -1,5 +1,6 @@
 var siteLocations;
 var siteCosts;
+var PORT = 8081
 
 var HttpClient = function () {
     this.get = function (aUrl, aCallback) {
@@ -17,7 +18,7 @@ var HttpClient = function () {
 var client = new HttpClient();
 
 function fetchData() {
-    client.get('http://localhost:3000/siteLocations', function (response) {
+    client.get('http://localhost:' + PORT + '/siteLocations', function (response) {
         responseArray = JSON.parse(response)
         siteLocations = responseArray;
 
@@ -25,7 +26,7 @@ function fetchData() {
         console.log(siteLocations.find(object => object.engNum === "J1547"))
         //drawMapItems();
 
-        client.get('http://localhost:3000/cost', function (response) {
+        client.get('http://localhost:'+ PORT + '/cost', function (response) {
             responseArray = JSON.parse(response)
             siteCosts = responseArray;
 

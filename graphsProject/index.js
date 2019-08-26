@@ -5,6 +5,8 @@ var allSiteNames = [];
 var powerArr = [];
 var costArr = [];
 
+var PORT = 8081
+
 var HttpClient = function() {
     this.get = function(aUrl, aCallback) {
         var anHttpRequest = new XMLHttpRequest();
@@ -20,7 +22,7 @@ var HttpClient = function() {
 
 var client = new HttpClient();
 
-client.get('http://localhost:3000/hydro', function(response) {
+client.get('http://localhost:' + PORT + '/hydro', function(response) {
     responseArray = JSON.parse(response)
     allHydroData = responseArray;
 
@@ -33,7 +35,7 @@ client.get('http://localhost:3000/hydro', function(response) {
     startAutocomplete();
 })
 
-client.get('http://localhost:3000/cost', function(response) {
+client.get('http://localhost:' + PORT + '/cost', function(response) {
     responseArray = JSON.parse(response)
     allCostData = responseArray;
     console.log("Done fetching cost data")
