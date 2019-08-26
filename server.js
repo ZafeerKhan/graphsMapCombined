@@ -15,8 +15,12 @@ var mongodbPort = '27017';
 var authenticate ='';
 //cloud
 if (cloud) {
- mongodbHost = 'ds261486.mlab.com';
- mongodbPort = '61486';
+//  mongodbHost = 'ds261486.mlab.com';
+//  mongodbPort = '61486';
+//  authenticate = 'zafeer:zafeer123@'
+
+ mongodbHost = '172.25.220.81';
+ mongodbPort = '27017';
  authenticate = 'zafeer:zafeer123@'
 }
  
