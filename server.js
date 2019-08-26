@@ -2,6 +2,7 @@ const express = require('express');
 
 const app = express();
 
+
 //app.use(express.static('public'));
 
 var MongoClient = require('mongodb').MongoClient;
@@ -29,6 +30,8 @@ var mongodbDatabase = 'hydrodata';
 // connect string for mongodb server running locally, connecting to a database called test
 var url = 'mongodb://'+authenticate+mongodbHost+':'+mongodbPort + '/' + mongodbDatabase;
 
+//app.set("view options", {layout: false});
+app.use(express.static('public'));
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", '*');
@@ -37,6 +40,7 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
     next();
 });
+
 
 app.get('/cost', (req, res) => {
     MongoClient.connect(url, function(err, db) {
