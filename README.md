@@ -8,5 +8,5 @@
  
   - In command prompt, run `node server.js` and then open http://localhost:PORT, where PORT is the port number stated in the terminal. 
  
- ## Changing Ports
- Change port number in three files
+ ## Running on a hosted server
+ 
