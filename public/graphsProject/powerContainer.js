@@ -1,6 +1,4 @@
 function drawHydroGraph(seriesData, plotBandsData) {
-    //var seriesData = [{name: site, data: powerChartData}]
-    let site = seriesData.name
     Highcharts.chart('powerContainer', {
         chart: {
             type: 'areaspline'

@@ -2,10 +2,10 @@ var mymap;
 var sitesData = [];
 var mapMarkers = [];
 
+//Get data from the server and draw the map
 function onStart() {
     siteLocations = fetchData()
-    drawMap();
-    //drawMapItems();   
+    drawMap();  
 }
 onStart();
 
@@ -20,6 +20,28 @@ function drawMap() {
     }).addTo(mymap);
 }
 
+//When user clicks a month button, clear the current markers and draw the markers for the map accordingly
+function filterMonth(month) {
+    let input = document.getElementById('percentVal').value;
+    let percentVal = parseInt(input)
+
+    clearMarkers()
+    console.log(month)
+    drawMapItems(month, percentVal)
+    console.log("sitesData.length: " + sitesData.length)
+}
+
+function clearMarkers() {
+    if (mapMarkers.length > 0) {
+        for (var i = 0; i < this.mapMarkers.length; i++) {
+            mymap.removeLayer(this.mapMarkers[i]);
+        }
+        mapMarkers = []
+        sitesData = []
+        console.log("cleared")
+    }
+}
+
 function drawMapItems(month, percentVal) {
     console.log("In drawMapItems")
     console.log(siteLocations.find(object => object.engNum === "J1488"))
@@ -28,7 +50,7 @@ function drawMapItems(month, percentVal) {
     let third = 0;
     let twoThird = 0;
 
-    
+    //Currently only doing 150 iterations
     for (let i = 0; i < 150; i++) {
         if (siteLocations[i].latitude == null || siteLocations[i].longitude == null || siteLocations[i].engNum == null) {
             continue
@@ -99,9 +121,6 @@ function drawMapItems(month, percentVal) {
 
 function addMarker(markerList) {
 
-    // var tooltip = $('.leaflet-tooltip');
-    // tooltip.css('font-size', 44);
-
     markerList.forEach(item => {
         var marker = L.marker([item.lat, item.long]).addTo(mymap);
 
@@ -122,6 +141,8 @@ function addMarker(markerList) {
 
     });
 }
+
+//TEST FUNCTIONS BELOW, not being used currently
 
 function addCircle(circleList) {
     popupList = [];
@@ -161,10 +182,6 @@ function addPolygon(polyList) {
     }
 }
 
-function onMapClick(e) {
-    alert("You clicked the map at " + e.latlng);
-}
-
 //markerInput = [{ lat: 51.5, long: -0.14 }, { lat: 51.508, long: -0.09 }, { lat: 51.5059, long: -0.04 }];
 //addMarker(markerInput);
 
@@ -181,25 +198,9 @@ polygonInput = [
 ];
 //addPolygon(polygonInput);
 
+function onMapClick(e) {
+    alert("You clicked the map at " + e.latlng);
+}
+
 mymap.on('click', onMapClick);
 
-function filterMonth(month) {
-    let input = document.getElementById('percentVal').value;
-    let percentVal = parseInt(input)
-
-    clearMarkers()
-    console.log(month)
-    drawMapItems(month, percentVal)
-    console.log("sitesData.length: " + sitesData.length)
-}
-
-function clearMarkers() {
-    if (mapMarkers.length > 0) {
-        for (var i = 0; i < this.mapMarkers.length; i++) {
-            mymap.removeLayer(this.mapMarkers[i]);
-        }
-        mapMarkers = []
-        sitesData = []
-        console.log("cleared")
-    }
-}

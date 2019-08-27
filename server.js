@@ -2,8 +2,7 @@ const express = require('express');
 
 const app = express();
 
-
-//app.use(express.static('public'));
+var PORT = 8082
 
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
@@ -16,9 +15,6 @@ var mongodbPort = '27017';
 var authenticate ='';
 //cloud
 if (cloud) {
-//  mongodbHost = 'ds261486.mlab.com';
-//  mongodbPort = '61486';
-//  authenticate = 'zafeer:zafeer123@'
 
  mongodbHost = '172.25.220.81';
  mongodbPort = '27017';
@@ -30,7 +26,6 @@ var mongodbDatabase = 'hydrodata';
 // connect string for mongodb server running locally, connecting to a database called test
 var url = 'mongodb://'+authenticate+mongodbHost+':'+mongodbPort + '/' + mongodbDatabase;
 
-//app.set("view options", {layout: false});
 app.use(express.static('public'));
 
 app.use(function(req, res, next) {
@@ -47,7 +42,6 @@ app.get('/cost', (req, res) => {
         assert.equal(null, err);
         console.log("Connected correctly to server.");
          db.collection('cost2018').find({}).toArray(function(err, results){
-             //console.log(results.find(site => site.eng === 'A0142'));
              db.close();
              console.log("Connection to database is closed.");
              res.send(results)
@@ -59,9 +53,7 @@ app.get('/hydro', (req, res) => {
     MongoClient.connect(url, function(err, db) {
         assert.equal(null, err);
         console.log("Connected correctly to server.");
-     
          db.collection('directhydro2018').find({}).toArray(function(err, results){
-             //console.log(results.find(site => site.eng === 'A0142'));
              db.close();
              console.log("Connection to database is closed.");
              res.send(results)
@@ -74,9 +66,7 @@ app.get('/siteLocations', (req, res) => {
     MongoClient.connect(url, function(err, db) {
         assert.equal(null, err);
         console.log("Connected correctly to server.");
-     
          db.collection('ranDBSites').find({}).toArray(function(err, results){
-             //console.log(results.find(site => site.eng === 'A0142'));
              db.close();
              console.log("Connection to database is closed.");
              res.send(results)
@@ -85,5 +75,5 @@ app.get('/siteLocations', (req, res) => {
 	
 });
 
-var PORT = 8081
+
 app.listen(PORT, () => console.log('server started on port: ' + PORT));

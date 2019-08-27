@@ -1,6 +1,4 @@
 function drawCostGraph(seriesData, plotBandsData) {
-    //var seriesData = [{name: site, data: costChartData}];
-    let site = seriesData.name
     Highcharts.chart('costContainer', {
         chart: {
             type: 'areaspline'

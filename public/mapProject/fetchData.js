@@ -1,6 +1,8 @@
 var siteLocations;
 var siteCosts;
-var PORT = 8081
+var PORT = 8082
+var SERVER = 'http://localhost'
+//var SERVER = 'http://172.25.220.81'
 
 var HttpClient = function () {
     this.get = function (aUrl, aCallback) {
@@ -17,25 +19,23 @@ var HttpClient = function () {
 
 var client = new HttpClient();
 
+//Fetch site location data from server
 function fetchData() {
-    client.get('http://localhost:' + PORT + '/siteLocations', function (response) {
+    client.get(SERVER + ':' + PORT + '/siteLocations', function (response) {
         responseArray = JSON.parse(response)
         siteLocations = responseArray;
 
         console.log("Done fetching site location data");
         console.log(siteLocations.find(object => object.engNum === "J1547"))
-        //drawMapItems();
 
-        client.get('http://localhost:'+ PORT + '/cost', function (response) {
+        //Fetch cost data from server
+        client.get(SERVER + ':' + PORT + '/cost', function (response) {
             responseArray = JSON.parse(response)
             siteCosts = responseArray;
 
-            console.log("Done fetching site cost data");
+            console.log("Done fetching site cost data")
             console.log(siteCosts.find(object => object.eng === "J1447"))
-            //console.log(siteCosts)
-            //drawMapItems();
-        }
-        )
+        })
     })
 
 }

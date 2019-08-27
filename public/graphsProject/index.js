@@ -5,7 +5,9 @@ var allSiteNames = [];
 var powerArr = [];
 var costArr = [];
 
-var PORT = 8081
+var PORT = 8082
+var SERVER = 'http://localhost'
+//var SERVER = 'http://172.25.220.81'
 
 var HttpClient = function() {
     this.get = function(aUrl, aCallback) {
@@ -22,10 +24,12 @@ var HttpClient = function() {
 
 var client = new HttpClient();
 
-client.get('http://localhost:' + PORT + '/hydro', function(response) {
+//Fetch hydro data from server
+client.get(SERVER + ':' + PORT + '/hydro', function(response) {
     responseArray = JSON.parse(response)
     allHydroData = responseArray;
 
+    //Parse out ENG numbers
     for (let i = 0; i < allHydroData.length; i++) {
         allSiteNames.push(allHydroData[i].eng)
     }
@@ -35,17 +39,17 @@ client.get('http://localhost:' + PORT + '/hydro', function(response) {
     startAutocomplete();
 })
 
-client.get('http://localhost:' + PORT + '/cost', function(response) {
+//Fetch cost data from server
+client.get(SERVER + ':' + PORT + '/cost', function(response) {
     responseArray = JSON.parse(response)
     allCostData = responseArray;
     console.log("Done fetching cost data")
 })
 
 
-
+//When user hits search, get data for the site accordingly and call functions to draw the maps
 function searchSite() {
     let input = document.getElementById('searchSites');
-    //console.log(input);
     let site = input.value;
     console.log(site)
     let powerDBData = allHydroData.find(object => object.eng === site);
@@ -81,6 +85,7 @@ function searchSite() {
         costDBData.Dec
     ];
 
+    //Check the change of rate comparison to create the red bar "bands"
     let plotBandsData = checkChange(powerChartData, costChartData)
 
     powerArr = [{name: site, data: powerChartData}]
@@ -90,6 +95,8 @@ function searchSite() {
     drawCostGraph(costArr, plotBandsData);
 }
 
+
+//When user hits the '+' button, get data for the new site accordingly and draw all graphs
 function addSite() {
     var input = document.getElementById('searchSites');
     var site = input.value;
@@ -128,6 +135,7 @@ function addSite() {
 
     let plotBandsData = null
 
+    //Push data to the global variable to draw multiple graphs
     powerArr.push({name: site, data: powerChartData});
     costArr.push({name: site, data: costChartData})
 
