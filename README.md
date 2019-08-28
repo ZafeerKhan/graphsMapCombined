@@ -1,6 +1,11 @@
 ﻿# Hydro Data PoC Application
  Uses the cell site power and cost hydro bill data to create tools to easier intrepet the data and see trends. 
  
+ ## Prerequisites Packages
+  - First install Node.js https://nodejs.org/en/
+  - `npm install express`
+  - `npm install mongodb@2.2.33`
+ 
  ## Running on local host
   - In /public/graphsProject/index.js , change the SERVER variable to be 'http://localhost' and set PORT to your desired port
   - In /public/mapProject/fetchData.js , change the SERVER variable to be 'http://localhost' and set PORT to the same port in the previous step
