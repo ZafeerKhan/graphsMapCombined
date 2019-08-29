@@ -9,7 +9,7 @@
   - Request the userCredentials.xlsx file by emailing viraj.dave@bell.ca or manpreet.kaur1@bell.ca
   - Place userCredentials.xlsx in the root project directory of graphsMapCombined
  
- ## Running on local host
+ ## Running on localhost
   - In /public/graphsProject/index.js , change the SERVER variable to be 'http://localhost' and set PORT to your desired port
   - In /public/mapProject/fetchData.js , change the SERVER variable to be 'http://localhost' and set PORT to the same port in the previous step
   - In server.js , set PORT to the same port
