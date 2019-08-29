@@ -9,23 +9,23 @@ var PORT = 8082
 var SERVER = 'http://localhost'
 //var SERVER = 'http://172.25.220.81'
 
-var HttpClient = function() {
-    this.get = function(aUrl, aCallback) {
+var HttpClient = function () {
+    this.get = function (aUrl, aCallback) {
         var anHttpRequest = new XMLHttpRequest();
-        anHttpRequest.onreadystatechange = function() { 
+        anHttpRequest.onreadystatechange = function () {
             if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
                 aCallback(anHttpRequest.responseText);
         }
 
-        anHttpRequest.open( "GET", aUrl, true );            
-        anHttpRequest.send( null );
+        anHttpRequest.open("GET", aUrl, true);
+        anHttpRequest.send(null);
     }
 }
 
 var client = new HttpClient();
 
 //Fetch hydro data from server
-client.get(SERVER + ':' + PORT + '/hydro', function(response) {
+client.get(SERVER + ':' + PORT + '/hydro', function (response) {
     responseArray = JSON.parse(response)
     allHydroData = responseArray;
 
@@ -40,7 +40,7 @@ client.get(SERVER + ':' + PORT + '/hydro', function(response) {
 })
 
 //Fetch cost data from server
-client.get(SERVER + ':' + PORT + '/cost', function(response) {
+client.get(SERVER + ':' + PORT + '/cost', function (response) {
     responseArray = JSON.parse(response)
     allCostData = responseArray;
     console.log("Done fetching cost data")
@@ -88,8 +88,8 @@ function searchSite() {
     //Check the change of rate comparison to create the red bar "bands"
     let plotBandsData = checkChange(powerChartData, costChartData)
 
-    powerArr = [{name: site, data: powerChartData}]
-    costArr = [{name: site, data: costChartData}]
+    powerArr = [{ name: site, data: powerChartData }]
+    costArr = [{ name: site, data: costChartData }]
 
     drawHydroGraph(powerArr, plotBandsData);
     drawCostGraph(costArr, plotBandsData);
@@ -100,6 +100,19 @@ function searchSite() {
 function addSite() {
     var input = document.getElementById('searchSites');
     var site = input.value;
+    let plotBandsData = null
+
+    //Check to see if the site is already drawn on the map
+    if (powerArr.find(object => object.name === site) && powerArr.length > 1) {
+        drawHydroGraph(powerArr, plotBandsData);
+        drawCostGraph(costArr, plotBandsData);
+        return
+    }
+    else if (powerArr.find(object => object.name === site)) {
+        searchSite()
+        return
+    }
+
     var powerDBData = allHydroData.find(object => object.eng === site);
     var costDBData = allCostData.find(object => object.eng === site);
 
@@ -133,11 +146,11 @@ function addSite() {
         costDBData.Dec
     ];
 
-    let plotBandsData = null
+    
 
     //Push data to the global variable to draw multiple graphs
-    powerArr.push({name: site, data: powerChartData});
-    costArr.push({name: site, data: costChartData})
+    powerArr.push({ name: site, data: powerChartData });
+    costArr.push({ name: site, data: costChartData })
 
     drawHydroGraph(powerArr, plotBandsData);
     drawCostGraph(costArr, plotBandsData);

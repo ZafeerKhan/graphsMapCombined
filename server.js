@@ -11,6 +11,18 @@ var cloud = true;
  
 var mongodbHost = '127.0.0.1';
 var mongodbPort = '27017';
+
+//Parse user credentials from external file "userCredentials.xlsx" for security purposes 
+var XLSX = require('xlsx')
+var workbook = XLSX.readFile('userCredentials.xlsx');
+var sheet_name_list = workbook.SheetNames;
+var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
+
+var user = xlData[0].User;
+var password = xlData[0].Password;
+
+console.log(user);
+console.log(password);
  
 var authenticate ='';
 //cloud
@@ -18,13 +30,15 @@ if (cloud) {
 
  mongodbHost = '172.25.220.81';
  mongodbPort = '27017';
- authenticate = 'zafeer:zafeer123@'
+ authenticate = user + ':' + password + '@'
+ console.log(authenticate);
 }
  
 var mongodbDatabase = 'hydrodata';
  
 // connect string for mongodb server running locally, connecting to a database called test
 var url = 'mongodb://'+authenticate+mongodbHost+':'+mongodbPort + '/' + mongodbDatabase;
+
 
 app.use(express.static('public'));
 
