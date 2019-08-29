@@ -3,8 +3,10 @@
  
  ## Prerequisites Packages
   - First install Node.js https://nodejs.org/en/
+  Run these commands on your terminal
   - `npm install express`
   - `npm install mongodb@2.2.33`
+  - `npm install xlsx`
  
  ## Running on local host
   - In /public/graphsProject/index.js , change the SERVER variable to be 'http://localhost' and set PORT to your desired port
