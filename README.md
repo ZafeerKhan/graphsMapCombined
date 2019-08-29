@@ -7,6 +7,7 @@
   - `npm install mongodb@2.2.33`
   - `npm install xlsx`
   - Request the userCredentials.xlsx file by emailing viraj.dave@bell.ca or manpreet.kaur1@bell.ca
+  - Place userCredentials.xlsx in the root project directory of graphsMapCombined
  
  ## Running on local host
   - In /public/graphsProject/index.js , change the SERVER variable to be 'http://localhost' and set PORT to your desired port
