@@ -1,5 +1,5 @@
 ﻿# Hydro Data PoC Application
- Uses the cell site power and cost hydro bill data to create tools to easier intrepet the data and see trends. 
+ Uses cell site power and cost hydro bill data to create tools to easier interpret the data and see trends.
  
  ## Prerequisites
   - First install Node.js https://nodejs.org/en/. Then run these commands on your terminal
