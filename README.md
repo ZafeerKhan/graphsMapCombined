@@ -1,11 +1,12 @@
 ﻿# Hydro Data PoC Application
  Uses the cell site power and cost hydro bill data to create tools to easier intrepet the data and see trends. 
  
- ## Prerequisites Packages
+ ## Prerequisites
   - First install Node.js https://nodejs.org/en/. Then run these commands on your terminal
   - `npm install express`
   - `npm install mongodb@2.2.33`
   - `npm install xlsx`
+  - Request the userCredentials.xlsx file from an admin
  
  ## Running on local host
   - In /public/graphsProject/index.js , change the SERVER variable to be 'http://localhost' and set PORT to your desired port
