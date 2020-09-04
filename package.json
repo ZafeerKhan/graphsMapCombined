@@ -19,7 +19,7 @@
   "homepage": "https://github.com/ZafeerKhan/graphsMapCombined#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "mongodb": "^2.2.33",
+    "mongodb": "^3.1.13",
     "xlsx": "^0.15.1"
   }
 }
